@@ -1,0 +1,10 @@
+{
+  "commit": {
+    "commit": "4f069a3a1ad389f21affae8e3539e50b99b06980",
+    "author": "Kevin Cazelles <kcazelle@uoguelph.ca>",
+    "time": "2020-01-22 16:11:25",
+    "message": ":white_check_mark: review tests for langage\n"
+  },
+  "remote": "https://github.com/ropensci/rcites",
+  "pkg": "rcites"
+}
