@@ -1,0 +1,12 @@
+{
+  "commit": {
+    "commit": "a2db86b63f69a35a18cad4284ce6597e978c7618",
+    "author": "Kevin Cazelles <kevin.cazelles@insileco.io>",
+    "time": "2023-02-20 01:13:04",
+    "files": 4,
+    "merge": false,
+    "message": "Uses unicode escapes in tests\n"
+  },
+  "repo": "https://github.com/ropensci/rcites",
+  "pkg": "rcites"
+}
