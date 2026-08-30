@@ -1,0 +1,11 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  a_get_started: a_get_started.html
+  b_elephant: b_elephant.html
+  c_bulk_analysis: c_bulk_analysis.html
+last_built: 2026-08-30T07:28Z
+urls:
+  reference: https://docs.ropensci.org/rcites/reference
+  article: https://docs.ropensci.org/rcites/articles

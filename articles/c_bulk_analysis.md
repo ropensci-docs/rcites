@@ -1,0 +1,128 @@
+# Bulk analysis with rcites
+
+## Broad taxon concept queries
+
+If you want to query all taxa, you can use
+[`spp_taxonconcept()`](https://docs.ropensci.org/rcites/reference/spp_taxonconcept.md)
+with `query_taxon = ""` (assuming your token is already set up):
+
+``` r
+
+res_cms <- spp_taxonconcept("", taxonomy = "CMS") #slow
+```
+
+    #>  ℹ Retrieving info from page 1 ........................ ✔
+    #>  ℹ 10 pages available, retrieving info from 9 more
+    #>  ℹ Retrieving info from page 2 ........................ ✔
+    #>  ℹ Retrieving info from page 3 ........................ ✔
+    #>  ℹ Retrieving info from page 4 ........................ ✔
+    #>  ℹ Retrieving info from page 5 ........................ ✔
+    #>  ℹ Retrieving info from page 6 ........................ ✔
+    #>  ℹ Retrieving info from page 7 ........................ ✔
+    #>  ℹ Retrieving info from page 8 ........................ ✔
+    #>  ℹ Retrieving info from page 9 ........................ ✔
+    #>  ℹ Retrieving info from page 10 ....................... ✔
+
+``` r
+
+dim(res_cms$general)
+```
+
+    #>  [1] 2541    7
+
+Alternatively, you can retrieve, for example, the first three pages of
+results returned by the API.
+
+``` r
+
+res_cites <- spp_taxonconcept("", page = 1:2)
+```
+
+    #>  ℹ Retrieving info from page 1 ........................ ✔
+    #>  ℹ 167 pages available, retrieving info from 1 more
+    #>  ℹ Retrieving info from page 2 ........................ ✔
+
+``` r
+
+dim(res_cites$general)
+```
+
+    #>  [1] 1000    8
+
+## Retrieving information for a set of taxon_concept ID
+
+All `spp_` functions
+(i.e. [`spp_distributions()`](https://docs.ropensci.org/rcites/reference/spp_distributions.md),
+[`spp_eu_legislation()`](https://docs.ropensci.org/rcites/reference/spp_eu_legislation.md),
+[`spp_cites_legislation()`](https://docs.ropensci.org/rcites/reference/spp_cites_legislation.md)
+and
+[`spp_references()`](https://docs.ropensci.org/rcites/reference/spp_references.md))
+can handle a vector of taxon_id which allows bulk analysis. Below we
+exemplify this feature for the four functions.
+
+### spp_distributions()
+
+``` r
+
+vc_txn <- c('4521', '3210', '10255')
+res1 <- spp_distributions(taxon_id = vc_txn, verbose = FALSE)
+## Number of countries concerned per taxon ID
+table(res1$distributions$taxon_id)
+```
+
+    #>  
+    #>  10255  3210  4521 
+    #>     15     8    42
+
+### spp_cites_legislation()
+
+``` r
+
+res2 <- spp_cites_legislation(taxon_id = vc_txn, verbose = FALSE)
+res2$cites_listings
+```
+
+    #>  # A tibble: 12 × 7
+    #>     taxon_id id    taxon_concept_id is_current appendix change_type effective_at
+    #>     <chr>    <chr> <chr>            <lgl>      <chr>    <chr>       <chr>       
+    #>   1 4521     30344 4521             TRUE       I        +           2017-01-02  
+    #>   2 4521     30115 4521             TRUE       II       +           2019-11-26  
+    #>   3 4521     32160 4521             TRUE       II       R+          2019-11-26  
+    #>   4 4521     32161 4521             TRUE       II       R+          2019-11-26  
+    #>   5 4521     32156 4521             TRUE       II       R+          2019-11-26  
+    #>   6 4521     32158 4521             TRUE       II       R+          2019-11-26  
+    #>   7 4521     32154 4521             TRUE       II       R+          2019-11-26  
+    #>   8 4521     32159 4521             TRUE       II       R+          2019-11-26  
+    #>   9 4521     32157 4521             TRUE       II       R+          2019-11-26  
+    #>  10 4521     32155 4521             TRUE       II       R+          2019-11-26  
+    #>  11 3210     4661  3210             TRUE       II       +           1987-10-22  
+    #>  12 10255    4645  10255            TRUE       I        +           2005-01-12
+
+### spp_eu_legislation()
+
+``` r
+
+res3 <- spp_eu_legislation(taxon_id = vc_txn, verbose = FALSE)
+res3$eu_listings
+```
+
+    #>  # A tibble: 4 × 7
+    #>    taxon_id id    taxon_concept_id is_current annex change_type effective_at
+    #>    <chr>    <chr> <chr>            <lgl>      <chr> <chr>       <chr>       
+    #>  1 4521     31788 4521             TRUE       A     +           2019-12-14  
+    #>  2 4521     31876 4521             TRUE       B     +           2019-12-14  
+    #>  3 3210     30578 3210             TRUE       B     +           2019-12-14  
+    #>  4 10255    30516 10255            TRUE       A     +           2019-12-14
+
+### spp_references()
+
+``` r
+
+res4 <- spp_references(taxon_id = vc_txn, verbose = FALSE)
+## Number of references per taxon ID
+table(res4$references$taxon_id)
+```
+
+    #>  
+    #>  10255  3210  4521 
+    #>      1     3    15
