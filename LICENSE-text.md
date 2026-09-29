@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2018-2021
+    COPYRIGHT HOLDER: Jonas Geschke; Kevin Cazelles; Ignasi Bartomeus
