@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "6a379bfeb1e79317603da840c1f95c476c486b79",
+    "author": "Kevin Cazelles <kevin.cazelles@insileco.io>",
+    "time": "2026-10-15T14:45:41Z",
+    "files": 2,
+    "merge": false,
+    "message": "chore: release 1.4.0\n"
+  },
+  "repo": "https://github.com/ropensci/rcites",
+  "pkg": "rcites",
+  "time": "2026-10-15T17:18:58Z"
+}
